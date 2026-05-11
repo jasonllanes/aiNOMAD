@@ -10,21 +10,20 @@ export function AIReasoningCard({ reasoning, loading, error, onGenerate, hasApiK
             <Sparkles size={16} />
             AI Procurement Reasoning
           </CardTitle>
-          {hasApiKey && !loading && !reasoning && (
+          {hasApiKey && !loading && (
             <button
               onClick={onGenerate}
               className="rounded-lg bg-purple-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-purple-500 transition-colors"
             >
-              Generate
+              {reasoning ? 'Regenerate' : 'Generate'}
             </button>
           )}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-3">
         {!hasApiKey && (
           <p className="text-sm text-white/40 leading-relaxed">
-            Add a <code className="text-purple-400">VITE_GROQ_API_KEY</code> to your{' '}
-            <code className="text-purple-400">.env</code> file to enable Groq LLaMA 3.3 70B powered reasoning.
+            AI reasoning is not configured on this deployment.
           </p>
         )}
 
@@ -40,7 +39,7 @@ export function AIReasoningCard({ reasoning, loading, error, onGenerate, hasApiK
         )}
 
         {reasoning && (
-          <div className="space-y-3">
+          <div className="space-y-3 pt-2 border-t border-white/5">
             {reasoning.split('\n\n').map((para, i) => (
               <p key={i} className="text-sm text-white/75 leading-relaxed">
                 {para}
@@ -50,9 +49,7 @@ export function AIReasoningCard({ reasoning, loading, error, onGenerate, hasApiK
         )}
 
         {hasApiKey && !loading && !reasoning && !error && (
-          <p className="text-sm text-white/40">
-            Click "Generate" to get a GPT-4o powered procurement recommendation.
-          </p>
+          <p className="text-sm text-white/40">Click "Generate" to get LLaMA 3.3 70B powered analysis.</p>
         )}
       </CardContent>
     </Card>

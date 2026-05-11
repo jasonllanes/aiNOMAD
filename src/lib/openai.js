@@ -11,7 +11,7 @@ import Groq from 'groq-sdk'
 export async function fetchAIReasoning(scoredProviders, recommended) {
   const apiKey = import.meta.env.VITE_GROQ_API_KEY
   if (!apiKey) {
-    throw new Error('VITE_GROQ_API_KEY is not set in your .env file.')
+    throw new Error('VITE_GROQ_API_KEY is not configured.')
   }
 
   const client = new Groq({ apiKey, dangerouslyAllowBrowser: true })
